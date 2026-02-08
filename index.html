@@ -2,10 +2,91 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>내 웹사이트</title>
+    <title>Be My Valentine?</title>
+    <style>
+        /* 전체 페이지 배경 및 폰트 설정 */
+        body {
+            background-color: #f0e0e8; /* 이미지와 유사한 연분홍 배경색 */
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif; /* 둥근 느낌의 폰트 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 화면 전체 높이 사용 */
+            margin: 0;
+        }
+
+        /* 중앙 흰색 카드 박스 스타일 */
+        .card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px; /* 둥근 모서리 */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 부드러운 그림자 */
+            text-align: center;
+        }
+
+        /* 고양이 캐릭터 이미지 스타일 */
+        .cat-image {
+            width: 150px; /* 이미지 크기 조절 */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* 질문 텍스트 스타일 */
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        /* 버튼 컨테이너 */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* 버튼 사이 간격 */
+            margin-bottom: 20px;
+        }
+
+        /* 버튼 공통 스타일 */
+        button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 'Yes' 버튼 스타일 (분홍색) */
+        .yes-btn {
+            background-color: #e84a7a; /* 진한 분홍색 */
+            color: white;
+        }
+
+        /* 'No' 버튼 스타일 (회색) */
+        .no-btn {
+            background-color: #e0e0e0; /* 연한 회색 */
+            color: #333;
+        }
+
+        /* 하단 작은 문구 스타일 */
+        .shy-text {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h1>안녕하세요!</h1>
-    <p>제 첫 번째 GitHub 페이지입니다.</p>
+    <div class="card">
+        <img src="https://via.placeholder.com/150" alt="Cute cat placeholder" class="cat-image">
+        
+        <h1>nirali will you be my valentine?</h1>
+        
+        <div class="buttons">
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+        
+        <p class="shy-text">"No" seems a bit shy</p>
+    </div>
 </body>
 </html>
