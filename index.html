@@ -2,41 +2,45 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>생일 축하해</title>
-   <style>
-        /* 1. 배경을 크림색으로 변경 */
+    <title>Serendipity</title>
+    <style>
+        /* 1. 배경 및 폰트 설정 (따뜻한 크림색) */
         body {
-            background-color: #fdf6e3; /* 부드러운 크림색 */
-            font-family: 'Verdana', sans-serif; /* 깔끔한 폰트로 변경 */
+            background-color: #fdf6e3;
+            font-family: 'Verdana', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden; /* 스크롤바 없애기 */
         }
 
-        /* 2. 카드에 테두리를 추가해 '엽서' 느낌 주기 */
+        /* 2. 카드 디자인 (엽서 느낌) */
         .card {
             background-color: #fff;
-            padding: 50px;
-            border: 2px solid #ffab91; /* 살구색 테두리 추가 */
-            border-radius: 15px; /* 모서리를 조금 덜 둥글게 */
-            box-shadow: 10px 10px 0px rgba(255, 171, 145, 0.3); /* 그림자를 딱딱하게 변경 (팝아트 느낌) */
+            padding: 40px;
+            border: 2px solid #ffab91; /* 살구색 테두리 */
+            border-radius: 15px;
+            box-shadow: 10px 10px 0px rgba(255, 171, 145, 0.3); /* 팝아트 그림자 */
             text-align: center;
             max-width: 400px;
             width: 90%;
+            position: relative;
+            z-index: 10;
         }
 
+        /* 메인 고양이 이미지 */
         .cat-image {
             width: 150px;
             height: auto;
             margin-bottom: 25px;
-            border-radius: 50%; /* 이미지를 동그랗게 자르기 (선택 사항) */
-            border: 3px solid #ffab91; /* 이미지에도 테두리 추가 */
+            border-radius: 50%;
+            border: 3px solid #ffab91;
         }
 
         h1 {
-            color: #5d4037; /* 진한 갈색 텍스트 */
+            color: #5d4037;
             font-size: 22px;
             margin-bottom: 35px;
             line-height: 1.5;
@@ -52,50 +56,170 @@
         button {
             padding: 12px 35px;
             border: 2px solid transparent;
-            border-radius: 8px; /* 버튼을 네모나게 변경 */
+            border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s; /* 마우스 올렸을 때 부드럽게 */
+            transition: all 0.3s ease; /* 부드러운 움직임 필수 */
         }
 
-        /* 3. 버튼 색상을 코랄(주황빛) 계열로 변경 */
+        /* Yes 버튼 (코랄색) */
         .yes-btn {
-            background-color: #ff7043; /* 코랄색 */
+            background-color: #ff7043;
             color: white;
         }
         .yes-btn:hover {
-            background-color: #d84315; /* 마우스 올리면 진해짐 */
+            background-color: #d84315;
+            transform: scale(1.1); /* 커지는 효과 */
         }
 
+        /* No 버튼 (회색, 도망가는 기능) */
         .no-btn {
             background-color: #fff;
             color: #5d4037;
-            border: 2px solid #d7ccc8; /* 회색 테두리 */
-        }
-        .no-btn:hover {
-            background-color: #efebe9;
+            border: 2px solid #d7ccc8;
+            position: relative; /* 움직임을 위해 필수 */
         }
 
         .shy-text {
             font-size: 13px;
             color: #a1887f;
-            font-style: italic; /* 이탤릭체 추가 */
+            font-style: italic;
+        }
+
+        /* -------------------------------------- */
+        /* 팝업창(모달) 스타일 */
+        /* -------------------------------------- */
+        .modal {
+            display: none; /* 평소엔 숨김 */
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* 배경 어둡게 */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 30px;
+            border: 2px solid #ffab91;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #000;
         }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <img src="ganadi.png" alt="Cute cat placeholder" class="cat-image">
+        <img src="ganadi.png" alt="Cute cat" class="cat-image">
         
-        <h1>영빈아 나랑 데이트 할래?</h1>
+        <h1>영빈아 나랑 데이트 갈래?</h1>
         
         <div class="buttons">
             <button class="yes-btn">Yes</button>
             <button class="no-btn">No</button>
         </div>
-        
-        <p class="shy-text">"No" seems a bit shy</p>
     </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img id="modal-img" src="" style="width: 100%; max-width: 200px; border-radius: 10px; margin-bottom: 15px;">
+            <p id="modal-text" style="font-size: 18px; color: #5d4037; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.querySelector('.no-btn');
+        const yesBtn = document.querySelector('.yes-btn');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalText = document.getElementById('modal-text');
+        const closeBtn = document.querySelector('.close-btn');
+
+        // [기능 1] No 버튼 도망가기 (슬금슬금)
+        noBtn.addEventListener('mouseover', function() {
+            // 현재 위치 파악
+            const rect = noBtn.getBoundingClientRect();
+            
+            // 처음 움직일 때 position을 fixed로 변경하여 화면 기준 이동
+            if (noBtn.style.position !== 'fixed') {
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = rect.left + 'px';
+                noBtn.style.top = rect.top + 'px';
+            }
+
+            // 랜덤하게 -100 ~ +100px 정도 이동
+            const moveX = (Math.random() - 0.5) * 200; 
+            const moveY = (Math.random() - 0.5) * 200;
+
+            let newX = parseFloat(noBtn.style.left) + moveX;
+            let newY = parseFloat(noBtn.style.top) + moveY;
+
+            // 화면 밖으로 나가지 않게 제한
+            if (newX < 50) newX = 50;
+            if (newX > window.innerWidth - 100) newX = window.innerWidth - 100;
+            if (newY < 50) newY = 50;
+            if (newY > window.innerHeight - 50) newY = window.innerHeight - 50;
+
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+        });
+
+        // [기능 2] Yes 버튼 클릭 시 팝업
+        yesBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+            
+            // ▼ 2. 행복한 사진 이름으로 바꾸세요!
+            modalImg.src = 'happy_ganadi.png'; 
+            modalText.innerText = '구래 좋아! ❤️';
+        });
+
+        // [기능 3] No 버튼 클릭 시 팝업 (잡았을 때)
+        noBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+            
+            // ▼ 3. 슬픈 사진 이름으로 바꾸세요!
+            modalImg.src = 'sad_ganadi.pnh'; 
+            modalText.innerText = '그래라😢';
+        });
+
+        // [기능 4] 닫기 버튼
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
